@@ -1,68 +1,68 @@
-import csv
-import os
+import csv #importamos archivo csv
+import os # importamos archivo os
 
-class Tarea:
-    def __init__(self, id, descripcion, prioridad, categoria="General"):
-        self.id = id
-        self.descripcion = descripcion
-        self.prioridad = prioridad
-        self.completada = False
-        self.categoria = categoria
+class Tarea: # creamos una clase llamada Tarea
+    def __init__(self, id, descripcion, prioridad, categoria="General"): # creamos un contructor y le damos parametros llamados (id, descripicion, prioridad y categoria)
+        self.id = id # Asigna el valor del parámetro id al atributo id del objeto
+        self.descripcion = descripcion # Asigna el valor del parámetro descripcion al atributo descripcion del objeto
+        self.prioridad = prioridad  # Asigna el valor del parámetro prioridad al atributo prioridad del objeto
+        self.completada = False  # Inicializa el atributo completada como false 
+        self.categoria = categoria # Asigna el valor del parámetro categoria al atributo categoria del objeto
 
-class Nodo:
-    def __init__(self, tarea):
-        self.tarea = tarea
-        self.siguiente = None
+class Nodo: #creamos una clase llamada nodo
+    def __init__(self, tarea): # creamos un contructor y le damos parametros llamada tarea
+        self.tarea = tarea # Asigna el valor del parámetro tarea al atributo tarea del objeto
+        self.siguiente = None # Inicializa el atributo siguiente como None
 
-class ListaEnlazada:
-    def __init__(self):
-        self.cabeza = None
-        self.id_actual = 1
+class ListaEnlazada: # creamos la clase listaEnlazada
+    def __init__(self): # # creamos un contructor
+        self.cabeza = None # Inicializa el atributo cabeza como None.
+        self.id_actual = 1 # Inicializa el atributo id_actual como 1
 
-    def esta_vacia(self):
-        return self.cabeza is None
+    def esta_vacia(self): # definimos la funcion esta vacia
+        return self.cabeza is None # nos devuelve la cabeza del la lista si es que no esta vacia
     
-    def existe_tarea(self, descripcion):
-        actual = self.cabeza
-        while actual is not None:
-            if actual.tarea.descripcion == descripcion:
-                return True
-            actual = actual.siguiente
-        return False
+    def existe_tarea(self, descripcion): #definimos la funcion existe_tarea
+        actual = self.cabeza # definimos una funcion llamada actual y le asignaremos el valor de cabeza
+        while actual is not None: # mientras que actual sea diferente a none se ejecutara el while
+            if actual.tarea.descripcion == descripcion: # si actual.Tarea.descripcion sean igual a descripicion
+                return True # nos devolvera verdadero
+            actual = actual.siguiente # la variable actual tomara el valor de actual.siguiente
+        return False # nos devolvera false
 
-    def agregar_tarea(self, descripcion, prioridad, categoria):
-        if self.existe_tarea(descripcion):
-            print("La tarea ya existe")
-            return
+    def agregar_tarea(self, descripcion, prioridad, categoria): # definimos una funcion llamada agregar_tarea y le pasamos los parametros (descripcion, prioridad, categoria)
+        if self.existe_tarea(descripcion):# Si la tarea con la descripción dada ya existe en la lista (existe_tarea retorna True)
+            print("La tarea ya existe") # nos devuelve el mensaje La tarea ya existe
+            return # sale de la funcion si agregar la tarea
         
-        tarea = Tarea(self.id_actual, descripcion, prioridad, categoria)
-        nuevo_nodo = Nodo(tarea)
-        self.id_actual += 1
+        tarea = Tarea(self.id_actual, descripcion, prioridad, categoria) # creamos la variable tarea y le asignaremos el valor de tarea con sus parametros
+        nuevo_nodo = Nodo(tarea) #creamos la variable nuevo_nodo y le asignaremos el valor de Nodo(tarea)
+        self.id_actual += 1 # se le sumara uno a id_actual
 
-        if self.esta_vacia() or tarea.prioridad > self.cabeza.tarea.prioridad:
-            nuevo_nodo.siguiente = self.cabeza
-            self.cabeza = nuevo_nodo
-        else:
-            actual = self.cabeza
-            while actual.siguiente is not None and actual.siguiente.tarea.prioridad >= tarea.prioridad:
-                actual = actual.siguiente
-            nuevo_nodo.siguiente = actual.siguiente
-            actual.siguiente = nuevo_nodo
+        if self.esta_vacia() or tarea.prioridad > self.cabeza.tarea.prioridad: # si self.esta_vacia o tarea.prioridad > self.cabeza.tarea.prioridad ingresara
+            nuevo_nodo.siguiente = self.cabeza # nuevo_nodo.siguiente tomara el valor de self.cabeza
+            self.cabeza = nuevo_nodo # self.cabeza tomara le asignaremos el valor de nuevo_nodo
+        else: # si no cumple las condiciones ingresara
+            actual = self.cabeza # la variable actual tomara el valor de self.cabeza
+            while actual.siguiente is not None and actual.siguiente.tarea.prioridad >= tarea.prioridad: #mientras que se cumpla la condicion
+                actual = actual.siguiente # actual tomara el valor de actual.siguiente
+            nuevo_nodo.siguiente = actual.siguiente # nuevo_nodo.siguiente = actual.siguiente
+            actual.siguiente = nuevo_nodo # actual.siguiente tomara el valor de nuevo_nodo
 
-        print("Tarea agregada con éxito.")
+        print("Tarea agregada con éxito.") # imprime el mensaje de tarea agregada con exito
 
-    def buscar_tarea_descripcion(self, texto):
+    def buscar_tarea_descripcion(self, texto): # definimos la variable buscar_tarea_descripcion
         pass
 
-    def completar_tarea(self, id):
-        actual = self.cabeza
-        while actual is not None:
-            if actual.tarea.id == id:
-                actual.tarea.completada = True
-                print(f"Tarea con ID {id} completada.")
-                return
-            actual = actual.siguiente
-        print(f"Tarea con ID {id} no encontrada.")  
+    def completar_tarea(self, id): # defimos la funcion completar_tarea con sus parametros
+        actual = self.cabeza # creamos la variable actual y tomara el valor de self.cabeza
+        while actual is not None: # mientras que se cumpla la condicion ingresara
+            if actual.tarea.id == id: # si actual.tarea.id es ingual a id
+                actual.tarea.completada = True # actual.tarea.completada tomara el valor true
+                print(f"Tarea con ID {id} completada.") # imprime el mensaje de tarea con id completada
+                return # sale de la funcion
+            actual = actual.siguiente # la variable actual tomara el valor de actual.siguiente
+        print(f"Tarea con ID {id} no encontrada.")  # imprime el mensaje de tarea con id no encontrada
 
     def eliminar_tarea(self, id):
         actual = self.cabeza
