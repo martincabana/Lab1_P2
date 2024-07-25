@@ -52,7 +52,12 @@ class ListaEnlazada: # creamos la clase listaEnlazada
         print("Tarea agregada con éxito.") # imprime el mensaje de tarea agregada con exito
 
     def buscar_tarea_descripcion(self, texto): # definimos la variable buscar_tarea_descripcion
-        pass
+        actual = self.cabeza  # iniciamos desde la cabeza de la lista
+        while actual is not None:  # mientras que actual sea diferente a None
+            if texto in actual.tarea.descripcion:  # si el texto se encuentra en la descripción de la tarea actual
+                return actual.tarea  # devolvemos la tarea encontrada
+            actual = actual.siguiente  # pasamos al siguiente nodo
+        return None  # si no se encuentra la tarea, devolvemos None
 
     def completar_tarea(self, id): # defimos la funcion completar_tarea con sus parametros
         actual = self.cabeza # creamos la variable actual y tomara el valor de self.cabeza
@@ -64,43 +69,43 @@ class ListaEnlazada: # creamos la clase listaEnlazada
             actual = actual.siguiente # la variable actual tomara el valor de actual.siguiente
         print(f"Tarea con ID {id} no encontrada.")  # imprime el mensaje de tarea con id no encontrada
 
-    def eliminar_tarea(self, id):
-        actual = self.cabeza
-        previo = None
-        while actual is not None:
-            if actual.tarea.id == id:
-                if previo is None:
-                    self.cabeza = actual.siguiente
-                else:
-                    previo.siguiente = actual.siguiente
-                print(f"Tarea eliminada: {actual.tarea.descripcion}")
-                return
-            previo = actual
-            actual = actual.siguiente
-        print(f"Tarea con ID {id} no encontrada.")  
+    def eliminar_tarea(self, id): # definimos una funcion de eliminar_tarea con su parametro
+        actual = self.cabeza # la variable actual tomara el valor de self.cabeza
+        previo = None # creamos una variable llamada previo y le sagnamos el valor de none
+        while actual is not None: # mientras que actual es diferente a none ingresara
+            if actual.tarea.id == id: # si actual.tarea.id es igual a id
+                if previo is None: # si previo es none
+                    self.cabeza = actual.siguiente # self.cabeza tomara el valor de actual.siguiente
+                else: # si no
+                    previo.siguiente = actual.siguiente # previo.siguiente tomara el valor de actual.siguiente
+                print(f"Tarea eliminada: {actual.tarea.descripcion}") # imprime tarea eliminada y el valor que tenga actal.tarea.descripcion
+                return # vuelve a la funcion
+            previo = actual # previo tomara el valor de actual
+            actual = actual.siguiente # actual tomara el valor de actual.siguiente
+        print(f"Tarea con ID {id} no encontrada.")   # imprime el mensaje tarea con id no encontrada
 
-    def mostrar_tareas(self):
-        actual = self.cabeza
-        while actual is not None:
-            estado = "Completada" if actual.tarea.completada else "Pendiente"
-            print(f"ID: {actual.tarea.id}, Descripción: {actual.tarea.descripcion}, Prioridad: {actual.tarea.prioridad}, Categoría: {actual.tarea.categoria}, Estado: {estado}")
-            actual = actual.siguiente
+    def mostrar_tareas(self): # definimos la funcion mostrar_tarea 
+        actual = self.cabeza # la variable actal tomara el valor de self.cabeza
+        while actual is not None: # mientras que actual sea diferente a none
+            estado = "Completada" if actual.tarea.completada else "Pendiente" # estado tomara el valor Completado si actual.tarea.completada si no estado tomara el valor de pendiente
+            print(f"ID: {actual.tarea.id}, Descripción: {actual.tarea.descripcion}, Prioridad: {actual.tarea.prioridad}, Categoría: {actual.tarea.categoria}, Estado: {estado}") # imprime el mesaje con el id, la descripcion, la prioridad y la categorial de la tarea
+            actual = actual.siguiente # actual tomara el valor de actual.siguiente
 
-    def mostrar_tareas_pendientes(self):
+    def mostrar_tareas_pendientes(self): # definimos la funcion mostrar_tarea_pendiente
         pass
         
-    def mostrar_tareas_descripcion(self, texto):
+    def mostrar_tareas_descripcion(self, texto): # definimos la funcion  mostrar_tareas_descripcion
         pass
 
     # Funciones estadísticas:
-    def contar_tareas_pendientes(self):
+    def contar_tareas_pendientes(self):  # definimos la funcion contar_tareas_pendientes
         pass
 
-    def mostrar_estadisticas(self):
+    def mostrar_estadisticas(self):  # definimos la funcion mostrar_estadisticas
         pass
         
     # Carga y guardado de archivos
-    def guardar_en_csv(self, archivo):
+    def guardar_en_csv(self, archivo):  # definimos la funcion
         with open(archivo, mode='w', newline='') as file:
             writer = csv.writer(file)
             actual = self.cabeza
@@ -122,31 +127,32 @@ class ListaEnlazada: # creamos la clase listaEnlazada
                 self.agregar_tarea_existente(tarea)
             print(f"Tareas cargadas desde {archivo} con éxito.")
 
-    def agregar_tarea_existente(self, tarea):
-        nuevo_nodo = Nodo(tarea)
-        if self.esta_vacia() or tarea.prioridad > self.cabeza.tarea.prioridad:
-            nuevo_nodo.siguiente = self.cabeza
-            self.cabeza = nuevo_nodo
-        else:
-            actual = self.cabeza
-            while actual.siguiente is not None and actual.siguiente.tarea.prioridad >= tarea.prioridad:
-                actual = actual.siguiente
-            nuevo_nodo.siguiente = actual.siguiente
-            actual.siguiente = nuevo_nodo
+    def agregar_tarea_existente(self, tarea): # definimos la funcion agregar_tarea_existente
+        nuevo_nodo = Nodo(tarea)  # Creamos un nuevo nodo que contiene la tarea
+        if self.esta_vacia() or tarea.prioridad > self.cabeza.tarea.prioridad: # Si la lista está vacía o la prioridad de la nueva tarea es mayor que la prioridad de la tarea en la cabeza de la lista
+            nuevo_nodo.siguiente = self.cabeza  # El siguiente nodo del nuevo nodo será la cabeza actual de la lista
+            self.cabeza = nuevo_nodo  # La cabeza de la lista ahora es el nuevo nodo
+        else: 
+            actual = self.cabeza # actual tomara el valor de cabeza
+            while actual.siguiente is not None and actual.siguiente.tarea.prioridad >= tarea.prioridad: #mientras que actual.siguiente is diferente a none y actual.siguiente.tarea.prioridad >= tarea.prioridad ingresara al bucle
+                actual = actual.siguiente # actual tomara el valor de actual.siguiente
+            nuevo_nodo.siguiente = actual.siguiente #  nuevo_nodo.siguiente tomara el valor de actual.siguiente
+            actual.siguiente = nuevo_nodo # actual.siguiente tomara el valor de nuevo_nodo
 
-        if tarea.id >= self.id_actual:
-            self.id_actual = tarea.id + 1
+        if tarea.id >= self.id_actual: # si tarea.id es mayor o igual a id_actual
+            self.id_actual = tarea.id + 1 # id_actual tomara el valor de tarea.id + 1
 
 def menu():
     print("\nMenú:")
     print("1. Agregar tarea")
     print("2. Completar tarea")
     print("3. Eliminar tarea")
-    print("4. Mostrar todas las tareas")
-    print("5. Mostrar tareas pendientes")
-    print("6. Guardar tareas en archivo CSV")
-    print("7. Cargar tareas desde archivo CSV")
-    print("8. Salir")
+    print("4. Buscar tarea por descripcion")
+    print("5. Mostrar todas las tareas")
+    print("6. Mostrar tareas pendientes")
+    print("7. Guardar tareas en archivo CSV")
+    print("8. Cargar tareas desde archivo CSV")
+    print("9. Salir")
 
 def main():
     lista_tareas = ListaEnlazada()
@@ -174,14 +180,24 @@ def main():
             id_tarea = int(input("Ingrese el ID de la tarea a eliminar: "))
             lista_tareas.eliminar_tarea(id_tarea)
         elif opcion == "4":
-            lista_tareas.mostrar_tareas()
+             texto = input("Ingrese la descripción de la tarea: ")
+             tarea = lista_tareas.buscar_tarea_descripcion(texto)  # Actualiza esta línea
+             if tarea:
+                 print(f"Tarea encontrada: ID: {tarea.id}, Descripción: {tarea.descripcion}, Prioridad: {tarea.prioridad}, Categoría: {tarea.categoria}, Estado: {'Completada' if tarea.completada else 'Pendiente'}")
+                 
+             else:
+                 print("No se encontró ninguna tarea con esa descripción.")
+
+            
         elif opcion == "5":
-            lista_tareas.mostrar_tareas_pendientes()
+            lista_tareas.mostrar_tareas()
         elif opcion == "6":
-            lista_tareas.guardar_en_csv(archivo_csv)
+            lista_tareas.mostrar_tareas_pendientes()
         elif opcion == "7":
-            lista_tareas.cargar_desde_csv(archivo_csv)
+            lista_tareas.guardar_en_csv(archivo_csv)
         elif opcion == "8":
+            lista_tareas.cargar_desde_csv(archivo_csv)
+        elif opcion == "9":
             print("Saliendo del sistema de gestión de tareas.")
             break
         else:
