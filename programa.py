@@ -182,9 +182,9 @@ def menu():
     print("3. Eliminar tarea")
     print("4. Mostrar todas las tareas")
     print("5. Mostrar tareas pendientes")
-    print("6. Guardar tareas en archivo CSV")
+    print("6. Mostrar tareas por descripción")
     print("7. Cargar tareas desde archivo CSV")
-    print("8. Mostrar tareas por descripción")
+    print("8. Guardar tareas en archivo CSV")
     print("9. Mostrar estadísticas")
     print("10. Salir")
 
@@ -225,19 +225,22 @@ def main():
         elif opcion == "5":
             lista_tareas.mostrar_tareas_pendientes()  # Llama al método mostrar_tareas_pendientes() para imprimir las tareas que todavía no se completaron.
        
-        # Buscar tareas por descripción.
+        # Guardar tareas en un archivo CSV.
         elif opcion == "6":
-            texto = input("Ingrese el texto de la descripción a buscar: ")  # Solicita el texto que se va a buscar en la descripción de la tarea.
-            lista_tareas.mostrar_tareas_descripcion(texto)  # Llama al método mostrar_tareas_descripcion() para buscar y mostrar tareas que contienen el texto especificado.
-
+            lista_tareas.guardar_en_csv(archivo_csv)  # Llama al método guardar_en_csv() para guardar las tareas en un archivo CSV.
+        
         # Cargar tareas desde un archivo CSV.
         elif opcion == "7":
             lista_tareas.cargar_desde_csv(archivo_csv)  # Llama al método cargar_desde_csv() para cargar las tareas desde un archivo CSV.
 
-        # Guardar tareas en un archivo CSV.
+        
+        # Buscar tareas por descripción.
+        
         elif opcion == "8":
-            lista_tareas.guardar_en_csv(archivo_csv)  # Llama al método guardar_en_csv() para guardar las tareas en un archivo CSV.
+            texto = input("Ingrese el texto de la descripción a buscar: ")  # Solicita el texto que se va a buscar en la descripción de la tarea.
+            lista_tareas.mostrar_tareas_descripcion(texto)  # Llama al método mostrar_tareas_descripcion() para buscar y mostrar tareas que contienen el texto especificado.
 
+        
         # Mostrar estadísticas de las tareas.
         elif opcion == "9":
             lista_tareas.mostrar_estadisticas()  # Llama al método mostrar_estadisticas() para imprimir estadísticas sobre las tareas.
