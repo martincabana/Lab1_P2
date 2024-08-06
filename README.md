@@ -14,7 +14,7 @@ Este es un sistema de gestión de tareas simple creado en Python utilizando una 
 - **Cargar desde CSV**: Carga tareas desde un archivo CSV.
 - **Mostrar Estadísticas**: Muestra estadísticas sobre las tareas (total, completadas y pendientes).
 
-## Uso
+## para su Uso
 
 ### Ejecución del Programa
 
