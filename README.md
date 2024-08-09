@@ -1,6 +1,10 @@
 # Sistema de Gestión de Tareas
 
+<<<<<<< HEAD
 Este es un sistema de gestión de tareas simple creado en Python utilizando una lista enlazada. Permite agregar, completar, eliminar y mostrar tareas, tambien  guardar y cargar las tareas desde un archivo CSV.
+=======
+Este es un sistema de gestión de tareas simple creado en Python utilizando una lista enlazada. Permite agregar, completar, eliminar y mostrar tareas, así como guardar y cargar las tareas desde un archivo CSV.
+>>>>>>> e6093808ac9715f343eb40c16afb5176e362066f
 
 ## Funcionalidades
 
@@ -18,7 +22,11 @@ Este es un sistema de gestión de tareas simple creado en Python utilizando una 
 
 ### Ejecución del Programa
 
+<<<<<<< HEAD
 Para iniciar el programa, corre el archivo `main.py`:
+=======
+Para iniciar el programa,  corre el archivo `main.py`:
+>>>>>>> e6093808ac9715f343eb40c16afb5176e362066f
 
 ```bash
 python main.py
